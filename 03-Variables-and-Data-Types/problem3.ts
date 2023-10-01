@@ -1,4 +1,6 @@
-import prompt from 'prompt-sync';
+import  * as promptSync from 'prompt-sync'
+
+const prompt = promptSync();
 
 function convertTemperature(temperature: number, unit: "Celsius" | "Fahrenheit" | "Kelvin"): {
     celsius: number;
