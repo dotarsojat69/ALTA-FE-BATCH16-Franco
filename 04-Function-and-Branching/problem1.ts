@@ -1,6 +1,18 @@
 function exponentiation(x: number, n: number): number | string {
   // your code here
+  if (n === 0) {
+    return 1;
+  } else if (n < 0) {
+    return "wrong input";
+  } else {
+    let result = 1;
+    for (let i = 0; i < n; i++) {
+      result *= x;
+    }
+    return result;
+  }
 }
+  
 
 console.log(exponentiation(2, 3)); // 8
 console.log(exponentiation(2, 12)); // 4096
