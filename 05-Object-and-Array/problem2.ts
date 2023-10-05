@@ -3,6 +3,26 @@ function joinArrayRemoveDuplicate(
   arrayB: string[]
 ): string[] {
   // your code here
+  const arrayGabung: string[] = [];
+
+  // Looping arrayA
+  for (const item of arrayA) {
+    // Jika item tidak ada di arrayGabung, tambahkan ke arrayGabung
+    if (!arrayGabung.includes(item)) {
+      arrayGabung.push(item);
+    }
+  }
+
+  // Looping arrayB
+  for (const item of arrayB) {
+    // Jika item tidak ada di arrayGabung, tambahkan ke arrayGabung
+    if (!arrayGabung.includes(item)) {
+      arrayGabung.push(item);
+    }
+  }
+
+  // Return array gabungan
+  return arrayGabung;
 }
 
 console.log(
