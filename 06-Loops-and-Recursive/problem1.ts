@@ -1,5 +1,13 @@
 function exponentiation(x: number, n: number): number | string {
   // your code here
+  if (n === 0) {
+    return 1;
+  } else if (n < 0) {
+    return "wrong input";
+  } else {
+    return x * exponentiation(x, n - 1);
+  }
+  
 }
 
 console.log(exponentiation(2, 3)); // 8

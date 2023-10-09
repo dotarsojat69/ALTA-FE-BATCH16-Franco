@@ -1,5 +1,15 @@
 function largestNumber(array: number[]): number {
   // your code here
+  // Jika array hanya memiliki satu elemen, maka elemen tersebut adalah nilai terbesar.
+  if (array.length === 1) {
+    return array[0];
+  }
+
+  // Jika array memiliki lebih dari satu elemen, maka fungsi akan memanggil dirinya sendiri dengan array yang dipotong satu elemen.
+  const max = largestNumber(array.slice(1));
+
+  // Bandingkan nilai terbesar dari array yang dipotong dengan elemen pertama dari array asli.
+  return array[0] > max ? array[0] : max;
 }
 
 console.log(largestNumber([5, 2, 67, 37, 85, 19, 10])); // 85
