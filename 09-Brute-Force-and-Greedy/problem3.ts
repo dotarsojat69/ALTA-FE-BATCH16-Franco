@@ -1,5 +1,9 @@
 function isPangram(texts: string): boolean {
   // your code here
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const normalizedTexts = texts.toLowerCase().replace(/[^a-z]/g, "");
+  const lettersInTexts = new Set(normalizedTexts);
+  return lettersInTexts.size === alphabet.length;
 }
 
 console.log(isPangram("The quick brown fox jumps over the lazy dog")); // true
