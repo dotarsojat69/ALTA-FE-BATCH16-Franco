@@ -34,7 +34,7 @@ console.log(
     ],
     [3, 6]
   )
-); // [6 5]
+); // [6, 5]
 console.log(
   playingDomino(
     [

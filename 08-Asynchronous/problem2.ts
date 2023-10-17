@@ -28,6 +28,24 @@ interface ObjItem {
   time: number;
 }
 
-function buyApparel(money: number, objItem: ObjItem, callback: () => void) {
+function buyApparel(money: number, objItem: ObjItem, callback: (sisa: number) => void) {
   // your code here
+  let sisa: number;
+  money -= objItem.price;
+  setTimeout(() => {
+    console.log("saya membawa uang sebesar", money + objItem.price);
+    console.log("ingin membeli", objItem.item, "dengan harga", objItem.price);
+    console.log("dan waktu yang dibutuhkan adalah", objItem.time, "s");
+    callback(money);
+}, objItem.time);
 }
+
+buyApparel(150000, clothes, (sisa) => {
+  buyApparel(sisa, pants, (sisa) =>{
+    buyApparel(sisa, hat, (sisa)=>{
+      buyApparel(sisa, shoes,(sisa)=>{
+        console.log("sisa kembalian", sisa)
+  })
+})
+  })
+})
