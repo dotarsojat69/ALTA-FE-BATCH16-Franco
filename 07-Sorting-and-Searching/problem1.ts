@@ -10,7 +10,6 @@ function maximumBuyProduct(money: number, productPrice: number[]): number {
     }
   }
   return maximum;
-
 }
 
 console.log(maximumBuyProduct(50000, [25000, 25000, 10000, 14000])); // 3

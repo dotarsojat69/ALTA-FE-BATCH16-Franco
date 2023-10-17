@@ -1,32 +1,22 @@
 function primeX(number: number): number {
   // your code here
-  // Periksa apakah bilangan yang diberikan lebih besar dari 1
-  if (number <= 1) {
-    return 0;
+let prime: number = 2;
+let array: number[] = [];
+
+while (array.length < number) {
+  let num: number = 0;
+  for (let i = 2; i <= Math.sqrt(prime); i++){
+    if (prime % i === 0){
+      num++
+      break;
   }
-
-  // Inisialisasi variabel untuk menyimpan bilangan prima
-  let prime = 2;
-
-  // Perulangan untuk mencari bilangan prima
-  for (let i = 10; i <= number; i++) {
-    // Periksa apakah bilangan tersebut hanya habis dibagi oleh 1 dan dirinya sendiri
-    let isPrime = true;
-    for (let j = 2; j < i; j++) {
-      if (i % j === 0) {
-        isPrime = false;
-        break;
-      }
-    }
-
-    // Jika bilangan tersebut prima, simpan ke variabel prime
-    if (isPrime) {
-      prime = i;
-    }
-  }
-
-  // Kembalikan bilangan prima
-  return prime;
+}
+if (num === 0) {
+  array.push(prime);
+}
+prime++;
+}
+return array[array.length-1];
 }
 
 console.log(primeX(1)); // 2
