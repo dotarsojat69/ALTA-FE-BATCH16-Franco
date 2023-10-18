@@ -12,6 +12,7 @@ function playingDomino(cards: number[][], deck: number[]): number[] {
   return [];
 }
 
+
 console.log(
   playingDomino(
     [

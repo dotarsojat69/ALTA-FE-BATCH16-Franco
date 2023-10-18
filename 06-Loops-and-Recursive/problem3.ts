@@ -1,43 +1,32 @@
 function primaSegiEmpat(wide: number, high: number, start: number): void {
   // your code here
   // Buat array untuk menyimpan bilangan prima
-  const primes = [];
+  const array: number[] = [];
+  const primes: number[] = [2,3,5,7];
 
-  // Perulangan untuk mencari bilangan prima
-  for (let i = start; i <= Number.MAX_SAFE_INTEGER; i++) {
-    if (isPrime(i)) {
-      primes.push();
+  while(array.length !== wide * high) {
+    start++;
+    if (
+      primes.includes(start) ||
+      (start % 2 !== 0 && start % 3 !== 0 && start % 5!== 0 && start % 7!== 0)
+    ) {
+    array.push(start);
     }
-  }
-
-  // Perulangan untuk mencetak bilangan prima pada segiempat
-  for (let i = 0; i < high; i++) {
-    for (let j = 0; j < wide; j++) {
-      console.log(primes[i * wide + j]);
     }
+
+  let up: number = 0;
+  let low: number = wide;
+  let s: string = "";
+
+  for (let i: number = 0; i < high; i++) {
+    s += array.slice(up, low).join(" ") + "\n";
+    up += wide;
+    low += wide;
   }
 
-  // Hitung jumlah bilangan prima
-  const total = primes.reduce((a, b) => a + b, 0);
+  s += array.reduce((a, b) => a + b, 0);
+  console.log(s);
 
-  // Cetak jumlah bilangan prima
-  console.log(total);
-}
-
-function isPrime(n: number): boolean {
-  // Cek bilangan genap
-  if (n % 2 === 0 && n > 2) {
-    return false;
-  }
-
-  // Cek bilangan prima lainnya
-  for (let i = 3; i * i <= n; i += 2) {
-    if (n % i === 0) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 console.log(primaSegiEmpat(2, 3, 13));
