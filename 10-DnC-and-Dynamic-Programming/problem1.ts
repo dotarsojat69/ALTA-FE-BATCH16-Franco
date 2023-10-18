@@ -1,5 +1,12 @@
 function fiboTopDown(n: number): number {
   // your code here
+  if (n < 0) {
+    return 0;
+  } else if (n === 0 || n === 1) {
+    return n;
+  } else {
+    return fiboTopDown(n - 1) + fiboTopDown(n - 2);
+  }
 }
 
 console.log(fiboTopDown(0)); // 0
