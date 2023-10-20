@@ -1,5 +1,6 @@
 function makeDiamond(char: string): void {
   // your code here
+  
 }
 
 makeDiamond("C");

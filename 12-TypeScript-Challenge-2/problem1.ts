@@ -1,5 +1,29 @@
 function pairSum(arr: number[], target: number): number[] {
   // your code here
+  const result: number[] = [];
+  let i = 0;
+  let j = arr.length - 1;
+
+  while (i < j) {
+    if (arr[i] + arr[j] === target) {
+      result.push(...[i, j]);
+
+      // Maju indeks i
+      i++;
+
+      // Maju indeks j
+      j--;
+    } else if (arr[i] + arr[j] < target) {
+      // Maju indeks i
+      i++;
+    } else {
+      // Maju indeks j
+      j--;
+    }
+  }
+
+  // Kembalikan hasil
+  return result;
 }
 
 console.log(pairSum([1, 2, 3, 4, 6], 6)); // [1, 3]

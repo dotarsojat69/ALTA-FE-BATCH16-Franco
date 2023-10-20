@@ -1,5 +1,22 @@
 function cetakTablePerkalian(number: number): void {
   // Your Solution Code Here
+  // Cek apakah input valid
+  if (number < 1) {
+    throw new Error("Input harus lebih dari 0");
+  }
+
+  let result = "";
+  
+  // Isi tabel
+  for (let i = 1; i <= number; i++) {
+    for (let j = 1; j <= number; j++) {
+      result += j * i;
+      result += " ";
+    } 
+    result += "\n";
+  }
+
+  console.log(result);
 }
 
 cetakTablePerkalian(9);
