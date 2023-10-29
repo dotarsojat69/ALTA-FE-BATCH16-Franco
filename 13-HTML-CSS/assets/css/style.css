@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+}
+
+/* Navbar */
+.navbar {
+display: flex;
+  width: 100%;
+  padding: 0.75rem;
+  margin-left: 0rem;
+}
+
+.navbar div {
+    position: relative;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    left: 100px;
+  }
+
+.navbar-nav{
+    display: flex;
+  justify-content: center;
+  padding-right: 2rem;
+  gap: 2.5rem;
+  text-transform: uppercase;
+  margin-right: 2rem;
+}
+
+.navbar-nav{
+    font-weight: bold;
+}
+
+.navbar .navbar-nav a:hover{
+    color: #f47522;
+}
+
+/* Hero */
+.hero{
+    min-height: 100vh;
+    display: flex;
+    align-items: center; 
+}
+
+.background {
+    background-image: url(../images/bg-img.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    color: #19345e;
+    padding: 1.4rem;
+    max-width: 100rem;
+}
+
+.poto{
+    width: 395px;
+    float: left;
+    position: relative;
+    border-radius: 80%;
+    padding: 15px 2px 15px 15px;
+    margin-left: 120px;
+    margin-top: 10px;
+}
+
+.hero .content .h6{
+    position: relative;
+    font-size: 2rem;
+    line-height: 1.3;
+    left: 40rem;
+    top: 15rem;
+}
+
+.hero .content h1{
+    font-size: 5rem;
+    color: #19345e;
+    text-align: center;
+    position: relative;
+    left: 625px;
+    top: 240px;
+   
+}
+
+.hero .content p{
+    position: absolute;
+    font-size: 2.7rem;
+    color: #19345e;
+    left: 663px;
+    top: 555px;
+}
+
+.hero .content .button{
+    position: absolute;
+    display: inline-block;
+    padding: 1rem 2.6rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #f47522;
+    border-radius: 2rem;
+    margin-left: 40rem;
+    margin-top: 330px;
+}

@@ -1,0 +1,150 @@
+html {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  color: #19345e;
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  box-sizing: border-box;
+  color: #19345e;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.navbar div {
+  position: relative;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  left: 100px;
+}
+
+.navbar-subcon2 {
+  display: flex;
+  justify-content: center;
+  padding-right: 2rem;
+  gap: 2.5rem;
+  text-transform: uppercase;
+  margin-right: 2rem;
+}
+
+.navbar-subcon2 a {
+  font-weight: bold;
+}
+
+.container-headline {
+  background-color: #f4f7fc;
+  height: 3rem;
+  padding: 3rem 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.education {
+  height: 2rem;
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+}
+
+ul {
+  height: 0.5rem;
+  padding: 0rem 4rem;
+  display: inline-block;
+  align-items: center;
+}
+
+.versatile {
+  height: 3rem;
+  padding: 3rem 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.photo {
+  width: 249px;
+  height: 248px;
+  top: 50px;
+  right: 150px;
+  opacity: 1;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.dot {
+  width: 100px;
+  position: absolute;
+  right: 348px;
+  top: 246px;
+}
+
+.container-headline p {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+table {
+  border-collapse: collapse;
+  position: relative;
+  margin: 20px;
+  color: #19345e;
+}
+
+table td {
+  border: 1px solid #19345e;
+  padding: 7px 15px;
+}
+
+.ttd{
+  padding: 4px 20px;
+}
+
+.container-content {
+  flex-grow: 1;
+  left: 10px;
+  position: relative;
+}
+
+.container-footer {
+  background-color: #19345e;
+  display: grid;
+  padding: 0.2rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  justify-items: center;
+}
+
+.logo-foot {
+  position: absolute;
+  margin-top: 0.5rem;
+  left: 70px;
+}
+
+.sosmed-pic{
+  gap: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+  .container-footer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.test {
+  color: white;
+}
