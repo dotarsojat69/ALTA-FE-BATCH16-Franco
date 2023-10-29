@@ -20,8 +20,8 @@ body {
     background-color: #CFD6E2;
     width: 2px;
     height: 600px;
-    left: 10px;
-    top: 10px;
+    left: 309px;
+    top: 280px;
     z-index: -1;
 }
 
@@ -88,18 +88,17 @@ body {
 }
 
 .container-footer {
-    background-color: #19345e;
-    background-repeat: no-repeat;
-    background-origin: border-box;
-    background-size: cover;
-    display: flex;
+  background-color: #19345e;
+  display: grid;
+  padding: 0.3rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  justify-items: center;
 }
 
 .logo-foot {
-    width: auto;
-    height: 100;
-    padding: 20px;
-    margin-left: 105px;
+    position: absolute;
+  margin-top: 0.5rem;
+  left: 70px;
 }
 
 .sosmed-pic{
@@ -108,5 +107,19 @@ body {
 
 .test {
     color: white;
+    text-align: right;
 
+}
+
+@media only screen and (max-width: 768px) {
+    .con-contact-left {
+      display: none;
+    }
+  
+    .col-9 {
+      width: 100% !important;
+    }
+    .col-3 {
+        opacity: 0;
+      }
 }
