@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 
 import { useToast } from "@/components/ui/use-toast";
@@ -7,6 +8,7 @@ import Layout from "@/components/layout";
 import { registerAccount } from "@/utils/apis/auth";
 
 const Register = () => {
+  const navigate = useNavigate();
   const {toast} = useToast();
 
   const [fullname, setFullName] = useState("");
@@ -31,6 +33,7 @@ const Register = () => {
     toast({
       description: result.message,
     });
+    navigate("/")
   } catch (error: any) {
     toast({
       title: "Oops! Something went wrong.",
@@ -43,7 +46,7 @@ const Register = () => {
   return (
     <Layout>
     <form className="flex flex-col gap-3" 
-    onSubmit={(e) => onSubmitRegister}
+    onSubmit={(e) => onSubmitRegister(e)}
     >
     <Input 
     placeholder="Full Name" 
@@ -51,15 +54,15 @@ const Register = () => {
     onChange={(e)=> setFullName(e.target.value)}
     />
     <Input 
-    type='email'
-    placeholder="Email Address" 
+    placeholder="Email" 
     value={email}
+    type="email"
     onChange={(e)=>setEmail(e.target.value)}
     />
     <Input 
-    type='password'
     placeholder="Password" 
     value={password}
+    type="password"
     onChange={(e)=>setPassword(e.target.value)}
     />
     <Input 
@@ -72,7 +75,7 @@ const Register = () => {
     value={phoneNumber}
     onChange={(e)=>setPhoneNumber(e.target.value)}
     />
-    <Button type="submit">Sign Up</Button>
+    <Button type="submit">Register</Button>
     </form>
     </Layout>
   );

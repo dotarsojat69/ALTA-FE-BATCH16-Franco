@@ -1,4 +1,3 @@
-import { type } from "os";
 import { registerAccount } from "./api";
 import {BodyRegister, BodyLogin} from "./types";
 

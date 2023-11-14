@@ -12,7 +12,7 @@ import {
     updateProfile,
 } from "@/utils/apis/users";
 import Alert from "@/components/alert";
-import { error } from "console";
+
 
 const EditProfile = () => {
     const { toast } = useToast();

@@ -1,5 +1,5 @@
 import { Response, PayloadPagination } from "@/utils/types/api";
-import { booksSampleData, Book } from ".";
+import { Book } from ".";
 import axiosWithConfig from "../axiosWithConfig";
 
 export const getBooks = async () => {

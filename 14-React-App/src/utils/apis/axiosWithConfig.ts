@@ -8,6 +8,8 @@ export const setAxiosConfig = (token: string) => {
 };
 
 axiosWithConfig.interceptors.request.use((axiosConfig) => {
+  const token = localStorage.getItem("token");
+  axiosConfig.headers.Authorization = `Bearer ${token}`;
   return axiosConfig;
 });
 

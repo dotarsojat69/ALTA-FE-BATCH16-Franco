@@ -1,4 +1,3 @@
-import { type } from "os";
 import { getProfile, updateProfile, deleteProfile } from "./api";
 import {Profile, ProfilePayload} from "./types";
 
