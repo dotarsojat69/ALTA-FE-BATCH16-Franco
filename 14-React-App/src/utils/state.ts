@@ -2,7 +2,6 @@ import { create } from "zustand";
 
 import { Book } from "./apis/books";
 
-
 interface CartState{
     cart: Book[];
     addBook: (book: Book) => void;
