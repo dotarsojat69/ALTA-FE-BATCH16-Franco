@@ -13,7 +13,7 @@ import useCartStore from "@/utils/state";
 const DetailBook = () => {
   const { cart, addBook } = useCartStore();
   const { toast } = useToast();
-  const param = useParams();
+  const params = useParams();
 
   const [book, setBook] = useState<Book>();
 
@@ -31,7 +31,7 @@ const DetailBook = () => {
 
   async function fetchData() {
     try {
-      const result = await getDetailBook(param.id_book as string);
+      const result = await getDetailBook(params.id_book as string);
       setBook(result.payload);
     } catch (error: any) {
       toast({
@@ -40,6 +40,13 @@ const DetailBook = () => {
         variant: "destructive",
       });
     }
+  }
+
+  function onClickBorrow() {
+    toast({
+      description: "Book has been added to cart.",
+    });
+    addBook(book!);
   }
 
   return (
