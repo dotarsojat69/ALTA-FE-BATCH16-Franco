@@ -32,10 +32,13 @@ export type BookSchema = z.infer<typeof bookSchema>;
 export interface Book {
   id: number;
   title: string;
-  featured: boolean;
   author: string;
+  featured: boolean;
   isbn: string;
   category: string;
   description: string;
   cover_image: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
 }

@@ -6,24 +6,33 @@ const ProtectedRoutes = () => {
     const {pathname} = useLocation();
     const {token, user} = useToken();
 
-    const authProtected = ["/login", "register"];
-    const tokenProtected = ["/profile", "/edit-profile", "/dashboard"];
-    const roleProtected = ["/dashboard"];
+    const authProtected = ["/login", "/register"];
+  const protectedByToken = [
+    "/profile",
+    "/edit-profile",
+    "/history-borrow",
+    "/dashboard",
+  ];
+  const adminProtected = ["/dashboard"];
+  const userProtected = ["/history-borrow"];
 
-    if (authProtected.includes(pathname)) {
-        if (token) return <Navigate to="/"/>;
+  if (authProtected.includes(pathname)) {
+    if (token) return <Navigate to="/" />;
+  }
+
+  if (protectedByToken.includes(pathname)) {
+    if (!token) return <Navigate to="/login" />;
+
+    if (adminProtected.includes(pathname)) {
+      if (user.role === "user") return <Navigate to="/" />;
     }
 
-    if (tokenProtected.includes(pathname)){
-        if (!token) return <Navigate to="/login" />
+    if (userProtected.includes(pathname)) {
+      if (user.role === "admin") return <Navigate to="/" />;
     }
+  }
 
-    if (roleProtected.includes(pathname)){
-        if(user.role === "user") return <Navigate to="/" />
-    }
-
-
-    return <Outlet/ >;
+  return <Outlet />;
 };
 
 export default ProtectedRoutes;

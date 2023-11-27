@@ -11,11 +11,11 @@ import {
   import { useToast } from "@/components/ui/use-toast";
   
   import axiosWithConfig, { setAxiosConfig } from "@/utils/apis/axiosWithConfig";
-  import { Profile, getProfile } from "@/utils/apis/users";
+  import { ProfileType, getProfile } from "@/utils/apis/users";
   
   interface Context {
     token: string;
-    user: Partial<Profile>;
+    user: Partial<ProfileType>;
     changeToken: (token?: string) => void;
   }
   
@@ -35,7 +35,7 @@ import {
     const { toast } = useToast();
   
     const [token, setToken] = useState(localStorage.getItem("token") ?? "");
-    const [user, setUser] = useState<Partial<Profile>>({});
+    const [user, setUser] = useState<Partial<ProfileType>>({});
   
     useEffect(() => {
       setAxiosConfig(token);

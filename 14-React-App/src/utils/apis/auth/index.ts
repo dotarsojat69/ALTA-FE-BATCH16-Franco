@@ -1,10 +1,10 @@
-import { loginAccount, registerAccount } from "./api";
+import { userLogin, userRegister } from "./api";
 import {
     loginSchema,
     registerSchema,
-    LoginSchema,
-    RegisterSchema,
+    LoginType,
+    RegisterType,
 } from "./types";
 
-export {loginAccount, registerAccount, loginSchema, registerSchema};
-export type {LoginSchema, RegisterSchema};
+export {userLogin, userRegister, loginSchema, registerSchema};
+export type {LoginType, RegisterType};

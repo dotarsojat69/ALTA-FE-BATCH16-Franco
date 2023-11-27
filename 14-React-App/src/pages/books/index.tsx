@@ -1,20 +1,27 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
-import { BookCard, BookCardLoading } from "@/components/book-card";
 import Pagination from "@/components/pagination";
+import { BookCard, BookCardLoading } from "@/components/book-card";
 import Layout from "@/components/layout";
 
-import { getBorrows, Borrow } from "@/utils/apis/borrows";
+import { Book, getBooks } from "@/utils/apis/books";
 import { Meta } from "@/utils/types/api";
 
-const HistoryBorrow = () => {
+const AllBook = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { toast } = useToast();
 
-  const [isLoadingBorrows, setIsLoadingBorrows] = useState(true);
-  const [borrows, setBorrows] = useState<Borrow[]>([]);
+  const [isLoadingBooks, setIsLoadingBooks] = useState(true);
+  const [books, setBooks] = useState<Book[]>([]);
   const [meta, setMeta] = useState<Meta>();
 
   useEffect(() => {
@@ -22,16 +29,16 @@ const HistoryBorrow = () => {
   }, [searchParams]);
 
   async function fetchData() {
-    setIsLoadingBorrows(true);
+    setIsLoadingBooks(true);
     let query: { [key: string]: string } = {};
     for (const entry of searchParams.entries()) {
       query[entry[0]] = entry[1];
     }
 
     try {
-      const result = await getBorrows({ ...query });
+      const result = await getBooks({ ...query });
       const { datas, ...rest } = result.payload;
-      setBorrows(datas);
+      setBooks(datas);
       setMeta(rest);
     } catch (error: any) {
       toast({
@@ -40,7 +47,7 @@ const HistoryBorrow = () => {
         variant: "destructive",
       });
     } finally {
-      setIsLoadingBorrows(false);
+      setIsLoadingBooks(false);
     }
   }
 
@@ -49,16 +56,39 @@ const HistoryBorrow = () => {
     setSearchParams(searchParams);
   }
 
+  function handleChangeSort(value: string) {
+    searchParams.set("sort", value);
+    setSearchParams(searchParams);
+  }
+
   return (
     <Layout>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center">
-        {isLoadingBorrows
+      <div className="flex justify-end">
+        <Select
+          onValueChange={(value) => handleChangeSort(value)}
+          data-testid="sort-by"
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="new">New</SelectItem>
+            <SelectItem value="default">Default</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <div
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center"
+        data-testid="books-container"
+      >
+        {isLoadingBooks
           ? [...Array(10).keys()].map((key) => <BookCardLoading key={key} />)
-          : borrows.map((borrow) => (
+          : books.map((book) => (
               <BookCard
-                key={borrow.id}
-                data={borrow.book}
-                navigate={`/books/${borrow.book.id}`}
+                key={book.id}
+                data={book}
+                navigate={`/books/${book.id}`}
+                data-testid="detail-book"
               />
             ))}
       </div>
@@ -72,4 +102,4 @@ const HistoryBorrow = () => {
   );
 };
 
-export default HistoryBorrow;
+export default AllBook;
