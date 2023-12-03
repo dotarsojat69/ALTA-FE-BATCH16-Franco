@@ -47,7 +47,7 @@ const Register = () => {
       toast({
         description: result.message,
       });
-      navigate("/login");
+      navigate();
     } catch (error: any) {
       toast({
         title: "Oops! Something went wrong.",
@@ -192,7 +192,7 @@ const Register = () => {
                   variant="secondary"
                   type="submit"
                   data-testid="btn-navigate-login"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate()}
                 >
                   Login
                 </Button>
