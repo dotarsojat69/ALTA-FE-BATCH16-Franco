@@ -1,23 +1,31 @@
 import { ReactNode } from "react";
+import clsx from "clsx";
 
-import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 interface Props {
   children: ReactNode;
+  centerY?: boolean;
+  centerX?: boolean;
 }
 
 const Layout = (props: Readonly<Props>) => {
-  const { children } = props;
+  const { children, centerY = false, centerX = false } = props;
 
   return (
-    <div className="w-full h-screen bg-white dark:bg-black font-roboto flex flex-col overflow-auto">
+    <div className="w-full h-screen bg-white dark:bg-black text-gray-900 dark:text-white overflow-auto font-roboto flex flex-col">
       <Navbar />
-      <div className="container grow mx-auto py-4 px-8 flex flex-col">
+      <div
+        className={clsx(
+          "container mx-auto grow py-4 px-8 flex flex-col",
+          centerY && "justify-center",
+          centerX && "items-center"
+        )}
+        data-testid="content-container"
+      >
         {children}
       </div>
-      <Toaster />
       <Footer />
     </div>
   );

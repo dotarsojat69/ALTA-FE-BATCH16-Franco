@@ -3,6 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
+
 import { CustomFormField } from "@/components/custom_formfield";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,9 +56,9 @@ const Login = () => {
   async function onSubmitLogin(data: LoginSchema) {
     try {
       const result = await loginAccount(data);
-      changeToken(result.payload.token);
+      changeToken(result.payload?.token);
       toast({
-        description: result.message,
+        description: "Hello, Welcome Back!",
       });
       navigate("/");
     } catch (error: any) {
@@ -62,53 +71,90 @@ const Login = () => {
   }
 
   return (
-    <Layout>
-      <Form {...form}>
-        <form
-          className="flex flex-col gap-3"
-          onSubmit={form.handleSubmit(onSubmitLogin)}
-        >
-          <CustomFormField control={form.control} name="email" label="Email">
-            {(field) => (
-              <Input
-                {...field}
-                placeholder="name@mail.com"
-                type="email"
-                disabled={form.formState.isSubmitting}
-                aria-disabled={form.formState.isSubmitting}
-              />
-            )}
-          </CustomFormField>
-          <CustomFormField
-            control={form.control}
-            name="password"
-            label="Password"
-          >
-            {(field) => (
-              <Input
-                {...field}
-                placeholder="Password"
-                type="password"
-                disabled={form.formState.isSubmitting}
-                aria-disabled={form.formState.isSubmitting}
-              />
-            )}
-          </CustomFormField>
-          <Button
-            type="submit"
-            disabled={form.formState.isSubmitting}
-            aria-disabled={form.formState.isSubmitting}
-          >
-            {form.formState.isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-              </>
-            ) : (
-              "Login"
-            )}
-          </Button>
-        </form>
-      </Form>
+    <Layout centerX centerY>
+      <Card className="w-full md:w-3/4 lg:w-1/2">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Login to your account using email</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              data-testid="form-login"
+              onSubmit={form.handleSubmit(onSubmitLogin)}
+              className="space-y-8"
+            >
+              <CustomFormField
+                control={form.control}
+                name="email"
+                label="Email"
+              >
+                {(field) => (
+                  <Input
+                    data-testid="input-email"
+                    placeholder="name@mail.com"
+                    type="email"
+                    disabled={form.formState.isSubmitting}
+                    aria-disabled={form.formState.isSubmitting}
+                    {...field}
+                  />
+                )}
+              </CustomFormField>
+              <CustomFormField
+                control={form.control}
+                name="password"
+                label="Password"
+              >
+                {(field) => (
+                  <Input
+                    data-testid="input-password"
+                    placeholder="Password"
+                    type="password"
+                    disabled={form.formState.isSubmitting}
+                    aria-disabled={form.formState.isSubmitting}
+                    {...field}
+                  />
+                )}
+              </CustomFormField>
+              <CardFooter className="grid gap-6">
+                <Button
+                  data-testid="btn-submit"
+                  type="submit"
+                  disabled={form.formState.isSubmitting}
+                  aria-disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </>
+                  ) : (
+                    "Login"
+                  )}
+                </Button>
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or
+                    </span>
+                  </div>
+                </div>
+                <Button
+                  data-testid="btn-navigate-register"
+                  variant="secondary"
+                  type="submit"
+                  onClick={() => navigate("/register")}
+                >
+                  Register
+                </Button>
+              </CardFooter>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </Layout>
   );
 };

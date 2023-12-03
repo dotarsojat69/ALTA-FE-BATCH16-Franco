@@ -1,23 +1,29 @@
-import { ShoppingBasketIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { ShoppingBasket } from "lucide-react";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Combobox from "@/components/combobox";
+import Cart from "@/components/cart";
 import { useToast } from "@/components/ui/use-toast";
 
-import useTheme from "@/utils/hooks/useTheme";
 import { useToken } from "@/utils/contexts/token";
+import { useTheme } from "@/utils/contexts/theme";
 
 const Navbar = () => {
   const { token, user, changeToken } = useToken();
-  const [toggleTheme] = useTheme();
+  const { setTheme } = useTheme();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -29,14 +35,20 @@ const Navbar = () => {
   }
 
   return (
-    <header className="w-full sticky top-0 bg-white/90 dark:bg-black/90 z-50">
-      <nav className="mx-auto flex container items-center justify-between p-6 ">
+    <header
+      className="w-full sticky top-0 bg-white/90 dark:bg-black/90 z-50"
+      aria-label="navbar"
+    >
+      <nav className="mx-auto flex container items-center justify-between p-6 lg:px-8 [&>*]:font-semibold [&>*]:leading-6 [&>*]:text-gray-900 [&>*]:dark:text-white">
         <Link className="text-xl tracking-widest" to="/">
-          Library App
+          LibraryApp
         </Link>
         <div className="flex gap-4 items-center justify-end">
+          <Combobox placeholder="Search books..." />
           {token && user.role === "user" && (
-            <ShoppingBasketIcon onClick={() => navigate("/cart")} />
+            <Cart>
+              <ShoppingBasket />
+            </Cart>
           )}
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -45,22 +57,43 @@ const Navbar = () => {
                 <AvatarFallback>LA</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-44" align="end">
+            <DropdownMenuContent className="w-44" align="end" forceMount>
               {token && (
                 <>
                   <DropdownMenuLabel>Hi! {user.full_name}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link to="/profile">Profile</Link>
+                  <DropdownMenuItem onClick={() => navigate("/profile")}>
+                    Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/history-borrow">History Borrow</Link>
-                  </DropdownMenuItem>
+                  {user.role === "user" ? (
+                    <DropdownMenuItem
+                      onClick={() => navigate("/history-borrow")}
+                    >
+                      My Books
+                    </DropdownMenuItem>
+                  ) : (
+                    <DropdownMenuItem onClick={() => navigate("/dashboard")}>
+                      Dashboard
+                    </DropdownMenuItem>
+                  )}
                 </>
               )}
-              <DropdownMenuItem onClick={() => toggleTheme()}>
-                Change Theme
-              </DropdownMenuItem>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem onClick={() => setTheme("light")}>
+                      Light
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("dark")}>
+                      Dark
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("system")}>
+                      System
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
               <DropdownMenuSeparator />
               {token ? (
                 <DropdownMenuItem onClick={() => handleLogout()}>
@@ -68,11 +101,11 @@ const Navbar = () => {
                 </DropdownMenuItem>
               ) : (
                 <>
-                  <DropdownMenuItem asChild>
-                    <Link to="/login">Login</Link>
+                  <DropdownMenuItem onClick={() => navigate("/login")}>
+                    Login
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/register">Register</Link>
+                  <DropdownMenuItem onClick={() => navigate("/register")}>
+                    Register
                   </DropdownMenuItem>
                 </>
               )}

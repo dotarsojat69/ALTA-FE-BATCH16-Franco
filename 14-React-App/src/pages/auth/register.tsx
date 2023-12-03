@@ -1,6 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 import { CustomFormField } from "@/components/custom_formfield";
 import { Button } from "@/components/ui/button";
@@ -16,6 +26,7 @@ import {
 } from "@/utils/apis/auth";
 
 const Register = () => {
+  const navigate = useNavigate
   const { toast } = useToast();
 
   const form = useForm<RegisterSchema>({
@@ -36,6 +47,7 @@ const Register = () => {
       toast({
         description: result.message,
       });
+      navigate("/login");
     } catch (error: any) {
       toast({
         title: "Oops! Something went wrong.",
@@ -46,11 +58,20 @@ const Register = () => {
   }
 
   return (
-    <Layout>
+    <Layout centerX centerY>
+      <Card className="w-full md:w-3/4 lg:w-1/2">
+        <CardHeader>
+          <CardTitle>Register</CardTitle>
+          <CardDescription>
+            Register your account now to get full access
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
       <Form {...form}>
         <form
-          className="flex flex-col gap-3"
-          onSubmit={form.handleSubmit(onSubmitRegister)}
+        data-testid="form-register"
+        onSubmit={form.handleSubmit(onSubmitRegister)}
+          className="space-y-8"
         >
           <CustomFormField
             control={form.control}
@@ -61,6 +82,7 @@ const Register = () => {
               <Input
                 {...field}
                 placeholder="John Doe"
+                data-testid="input-full-name"
                 disabled={form.formState.isSubmitting}
                 aria-disabled={form.formState.isSubmitting}
               />
@@ -72,6 +94,7 @@ const Register = () => {
                 {...field}
                 placeholder="name@mail.com"
                 type="email"
+                data-testid="input-email"
                 disabled={form.formState.isSubmitting}
                 aria-disabled={form.formState.isSubmitting}
               />
@@ -86,6 +109,7 @@ const Register = () => {
               <Input
                 {...field}
                 placeholder="Password"
+                data-testid="input-password"
                 type="password"
                 disabled={form.formState.isSubmitting}
                 aria-disabled={form.formState.isSubmitting}
@@ -102,6 +126,7 @@ const Register = () => {
                 {...field}
                 placeholder="Retype Password"
                 type="password"
+                data-testid="input-repassword"
                 disabled={form.formState.isSubmitting}
                 aria-disabled={form.formState.isSubmitting}
               />
@@ -116,6 +141,7 @@ const Register = () => {
               <Input
                 {...field}
                 placeholder="Address"
+                data-testid="input-address"
                 disabled={form.formState.isSubmitting}
                 aria-disabled={form.formState.isSubmitting}
               />
@@ -131,13 +157,16 @@ const Register = () => {
                 {...field}
                 placeholder="Phone Number"
                 type="tel"
+                data-testid="input-phone-number"
                 disabled={form.formState.isSubmitting}
                 aria-disabled={form.formState.isSubmitting}
               />
             )}
           </CustomFormField>
+          <CardFooter className="grid gap-6">
           <Button
             type="submit"
+            data-testid="btn-submit"
             disabled={form.formState.isSubmitting}
             aria-disabled={form.formState.isSubmitting}
           >
@@ -149,8 +178,29 @@ const Register = () => {
               "Register"
             )}
           </Button>
-        </form>
-      </Form>
+          <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or
+                    </span>
+                  </div>
+                </div>
+                <Button
+                  variant="secondary"
+                  type="submit"
+                  data-testid="btn-navigate-login"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </Button>
+              </CardFooter>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </Layout>
   );
 };
