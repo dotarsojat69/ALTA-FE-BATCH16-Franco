@@ -10,9 +10,10 @@ const BookCard = (props: Props) => {
   const { data } = props;
 
   return (
-    <Link 
-    className="flex flex-col p-4 items-center gap-3 w-48 md:w-56 lg:w-64 h-fit"
-    to={`/books/$data.id`}>
+    <Link
+      className="flex flex-col p-4 items-center gap-3 w-48 md:w-56 lg:w-64 h-fit"
+      to={`/books/${data.id}`}
+    >
       <figure className="overflow-hidden shadow-md shadow-neutral-300">
         <img
           className="h-auto w-auto object-cover aspect-[3/4]"

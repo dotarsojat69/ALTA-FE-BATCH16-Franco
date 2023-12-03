@@ -6,7 +6,7 @@ import useCartStore from "@/utils/state";
 import { Button } from "@/components/ui/button";
 
 
-const cart = () => {
+const Cart = () => {
     const { cart, deleteBook } = useCartStore();
 
     async function onBorrow() {
@@ -36,3 +36,5 @@ const cart = () => {
         </Layout>
     );
 };
+
+export default Cart;

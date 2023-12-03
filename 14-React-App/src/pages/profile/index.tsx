@@ -45,7 +45,7 @@ const Index = () => {
         <p>{profile?.phone_number}</p>
         <Button asChild>
           <Link to="/edit-profile">Edit Profile</Link>
-          </Button>
+        </Button>
       </div>
     </Layout>
   );
