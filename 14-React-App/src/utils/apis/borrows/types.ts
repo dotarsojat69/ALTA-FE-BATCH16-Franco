@@ -1,6 +1,4 @@
 import * as z from "zod";
-import { Book } from "../books";
-import { ProfileType } from "../users";
 
 
 export const borrowSchema = z.object({
@@ -24,10 +22,17 @@ export type BorrowSchema = z.infer<typeof borrowSchema>;
 export type BorrowPayload = z.infer<typeof borrowPayload>;
 
 export interface Borrow{
-    id: number;
+    id?: number;
     borrow_date: Date;
     due_date: Date;
-    return_date: Date;
-    book: Book;
-    user: ProfileType;
+    return_date?: Date;
+    book: {
+        id: number,
+        title: string,
+        cover_image: string;
+    };
+    user: {
+        id: number,
+        full_name: string;
+    };
 }

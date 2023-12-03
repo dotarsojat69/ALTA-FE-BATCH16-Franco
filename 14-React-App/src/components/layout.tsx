@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import clsx from "clsx";
 
 import { Toaster } from "./ui/toaster";
 import Navbar from "@/components/navbar";
@@ -7,8 +6,6 @@ import Footer from "@/components/footer";
 
 interface Props {
   children: ReactNode;
-  centerY?: boolean;
-  centerX?: boolean;
 }
 
 const Layout = (props: Readonly<Props>) => {

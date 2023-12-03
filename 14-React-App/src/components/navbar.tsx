@@ -11,7 +11,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/components/ui/use-toast";
 
-import useTheme from "@/utils/hooks/useTitle";
+import useTheme from "@/utils/hooks/useTheme";
 import { useToken } from "@/utils/contexts/token";
 
 const Navbar = () => {

@@ -1,88 +1,54 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { BookCard, BookCardLoading } from "@/components/book-card";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
-import { getBorrows, Borrow } from "@/utils/apis/borrows";
-import { useToken } from "@/utils/contexts/token";
+import { Profile, getProfile } from "@/utils/apis/users";
 
-const Profile = () => {
-  const { user } = useToken();
+const Index = () => {
+  const { toast } = useToast();
 
-  const [recentlyBorrow, setRecentlyBorrow] = useState<Borrow[]>([]);
-  const [isLoadingBorrows, setIsLoadingBorrows] = useState(true);
+  const [profile, setProfile] = useState<Profile>();
 
   useEffect(() => {
-    user.role === "user" && fetchData();
-  }, [user]);
+    fetchData();
+  }, []);
 
   async function fetchData() {
-    setIsLoadingBorrows(true);
     try {
-      const result = await getBorrows({ limit: 5 });
-      setRecentlyBorrow(result.payload.datas);
+      const result = await getProfile();
+      setProfile(result.payload);
     } catch (error: any) {
       toast({
         title: "Oops! Something went wrong.",
         description: error.toString(),
         variant: "destructive",
       });
-    } finally {
-      setIsLoadingBorrows(false);
     }
   }
 
   return (
     <Layout>
       <div className="flex flex-col gap-4 items-center">
-        <div className="w-60 h-60">
+        <figure className="w-60 h-60">
           <img
             className="aspect-square rounded-full object-cover"
-            src={user.profile_picture}
-            alt={`${user.full_name}'s profile picture`}
+            src={profile?.profile_picture}
+            alt={profile?.full_name}
           />
-        </div>
-        <p className="font-bold text-2xl">{user.full_name}</p>
+        </figure>
+        <p className="font-bold text-2xl">{profile?.full_name}</p>
+        <p>{profile?.email}</p>
+        <p>{profile?.address}</p>
+        <p>{profile?.phone_number}</p>
         <Button asChild>
           <Link to="/edit-profile">Edit Profile</Link>
-        </Button>
+          </Button>
       </div>
-      {user.role === "user" && (
-        <>
-          <div className="flex justify-between my-9 w-full items-center">
-            <p className="font-semibold text-lg tracking-wider">
-              Recently Borrowed Book
-            </p>
-            <Link className="text-sm tracking-wide" to="/history-borrow">
-              See more
-            </Link>
-          </div>
-          <div className="relative">
-            <ScrollArea>
-              <div className="flex space-x-4 pb-4">
-                {isLoadingBorrows
-                  ? [...Array(5).keys()].map((key) => (
-                      <BookCardLoading key={key} />
-                    ))
-                  : recentlyBorrow.map((borrow) => (
-                      <BookCard
-                        key={borrow.id}
-                        data={borrow.book}
-                        navigate={`/books/${borrow.book.id}`}
-                      />
-                    ))}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-          </div>
-        </>
-      )}
     </Layout>
   );
 };
 
-export default Profile;
+export default Index;
